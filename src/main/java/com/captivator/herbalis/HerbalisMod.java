@@ -2,13 +2,17 @@ package com.captivator.herbalis;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -23,6 +27,9 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(HerbalisMod.MODID)
@@ -41,6 +48,17 @@ public class HerbalisMod
     public static final RegistryObject<Block> EXAMPLE_BLOCK = BLOCKS.register("example_block", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)));
     // Creates a new BlockItem with the id "examplemod:example_block", combining the namespace and path
     public static final RegistryObject<Item> EXAMPLE_BLOCK_ITEM = ITEMS.register("example_block", () -> new BlockItem(EXAMPLE_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+
+    // PLANTAGO
+    public static final RegistryObject<Item> PLANTAGO_LEAF_ITEM = ITEMS.register("plantago_leaf", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+    public static final RegistryObject<Block> PLANTAGO_BLOCK = BLOCKS.register("plantago", () -> new BushBlock(
+            Block.Properties
+            .of(Material.PLANT)
+            .noCollission()
+            .instabreak()
+            .sound(SoundType.GRASS)
+            .offsetType(BlockBehaviour.OffsetType.XZ)));
+    public static final RegistryObject<Item> PLANTAGO_BLOCK_ITEM = ITEMS.register("plantago", () -> new BlockItem(PLANTAGO_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
 
     public HerbalisMod(FMLJavaModLoadingContext context)
     {
@@ -92,6 +110,7 @@ public class HerbalisMod
             // Some client setup code
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+            ItemBlockRenderTypes.setRenderLayer(PLANTAGO_BLOCK.get(), RenderType.cutout());
         }
     }
 }
