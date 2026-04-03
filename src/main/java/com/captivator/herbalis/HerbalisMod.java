@@ -60,6 +60,15 @@ public class HerbalisMod
             .offsetType(BlockBehaviour.OffsetType.XZ)));
     public static final RegistryObject<Item> PLANTAGO_BLOCK_ITEM = ITEMS.register("plantago", () -> new BlockItem(PLANTAGO_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
 
+    // MORTAR_AND_PESTLE
+    public static final RegistryObject<Block> MORTAR_AND_PESTLE = BLOCKS.register("mortar_and_pestle", () -> new MortarAndPestleBlock(
+            Block.Properties
+                    .of(Material.STONE)
+                    .strength(0.5f)
+                    .sound(SoundType.STONE)
+                    .noOcclusion()));
+    public static final RegistryObject<Item> MORTAR_AND_PESTLE_ITEM = ITEMS.register("mortar_and_pestle", () -> new BlockItem(MORTAR_AND_PESTLE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+
     public HerbalisMod(FMLJavaModLoadingContext context)
     {
         IEventBus modEventBus = context.getModEventBus();
@@ -111,6 +120,7 @@ public class HerbalisMod
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
             ItemBlockRenderTypes.setRenderLayer(PLANTAGO_BLOCK.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(MORTAR_AND_PESTLE.get(), RenderType.cutout());
         }
     }
 }

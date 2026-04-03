@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    "X X",
+    "XXX"
+  ],
+  "key": {
+    "X": { "item": "minecraft:cobbled_deepslate" }
+  },
+  "result": {
+    "item": "herbalis:mortar_and_pestle",
+    "count": 1
+  }
+}
