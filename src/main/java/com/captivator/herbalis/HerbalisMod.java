@@ -109,7 +109,7 @@ public class HerbalisMod
     public static final RegistryObject<Item> PLANTAGO_LEAF_ITEM = ITEMS.register("plantago_leaf", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
     public static final RegistryObject<Item> DRIED_PLANTAGO_ITEM = ITEMS.register("dried_plantago", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
     public static final RegistryObject<Item> PLANTAGO_POULTICE = ITEMS.register("plantago_poultice", () -> new Item(new Item.Properties().tab(HERBALIS_TAB).food(new FoodProperties.Builder().alwaysEat().effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 200, 0), 1.0F).build())));
-    public static final RegistryObject<Item> MASHED_PLANTAGO_ITEM = ITEMS.register("mashed_plantago", () -> new WaterCraftedItem(new Item.Properties().tab(HERBALIS_TAB), PLANTAGO_POULTICE.get()));
+    public static final RegistryObject<Item> MASHED_PLANTAGO_ITEM = ITEMS.register("mashed_plantago", () -> new WaterCraftedItem(new Item.Properties().tab(HERBALIS_TAB), PLANTAGO_POULTICE));
     public static final RegistryObject<Item> GROUND_PLANTAGO_ITEM = ITEMS.register("ground_plantago", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
 
     // ---------------------------------------------------------------------------------
