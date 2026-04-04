@@ -1,7 +1,6 @@
 package com.captivator.herbalis;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.BlockItem;
@@ -62,10 +61,14 @@ public class HerbalisMod
         public void fillItemList(net.minecraft.core.NonNullList<ItemStack> items) {
             items.add(new ItemStack(PLANTAGO_BLOCK_ITEM.get()));
             items.add(new ItemStack(PLANTAGO_LEAF_ITEM.get()));
-            items.add(new ItemStack(DRIED_PLANTAGO_LEAF_ITEM.get()));
+            items.add(new ItemStack(DRIED_PLANTAGO_ITEM.get()));
+            items.add(new ItemStack(MASHED_PLANTAGO_ITEM.get()));
+            items.add(new ItemStack(GROUND_PLANTAGO_ITEM.get()));
             items.add(new ItemStack(CHAMOMILE_BLOCK_ITEM.get()));
             items.add(new ItemStack(CHAMOMILE_FLOWERS_ITEM.get()));
-            items.add(new ItemStack(DRIED_CHAMOMILE_FLOWERS_ITEM.get()));
+            items.add(new ItemStack(DRIED_CHAMOMILE_ITEM.get()));
+            items.add(new ItemStack(MASHED_CHAMOMILE_ITEM.get()));
+            items.add(new ItemStack(GROUND_CHAMOMILE_ITEM.get()));
             items.add(new ItemStack(MORTAR_AND_PESTLE_ITEM.get()));
             items.add(new ItemStack(DRYING_RACK_ITEM.get()));
         }
@@ -82,7 +85,9 @@ public class HerbalisMod
             .offsetType(BlockBehaviour.OffsetType.XZ)));
     public static final RegistryObject<Item> PLANTAGO_BLOCK_ITEM = ITEMS.register("plantago", () -> new BlockItem(PLANTAGO_BLOCK.get(), new Item.Properties().tab(HERBALIS_TAB)));
     public static final RegistryObject<Item> PLANTAGO_LEAF_ITEM = ITEMS.register("plantago_leaf", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
-    public static final RegistryObject<Item> DRIED_PLANTAGO_LEAF_ITEM = ITEMS.register("dried_plantago_leaf", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
+    public static final RegistryObject<Item> DRIED_PLANTAGO_ITEM = ITEMS.register("dried_plantago", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
+    public static final RegistryObject<Item> MASHED_PLANTAGO_ITEM = ITEMS.register("mashed_plantago", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
+    public static final RegistryObject<Item> GROUND_PLANTAGO_ITEM = ITEMS.register("ground_plantago", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
 
     // ---------------------------------------------------------------------------------
     // CHAMOMILE
@@ -95,10 +100,12 @@ public class HerbalisMod
                     .offsetType(BlockBehaviour.OffsetType.XZ)));
     public static final RegistryObject<Item> CHAMOMILE_BLOCK_ITEM = ITEMS.register("chamomile", () -> new BlockItem(CHAMOMILE_BLOCK.get(), new Item.Properties().tab(HERBALIS_TAB)));
     public static final RegistryObject<Item> CHAMOMILE_FLOWERS_ITEM = ITEMS.register("chamomile_flowers", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
-    public static final RegistryObject<Item> DRIED_CHAMOMILE_FLOWERS_ITEM = ITEMS.register("dried_chamomile_flowers", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
+    public static final RegistryObject<Item> DRIED_CHAMOMILE_ITEM = ITEMS.register("dried_chamomile", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
+    public static final RegistryObject<Item> MASHED_CHAMOMILE_ITEM = ITEMS.register("mashed_chamomile", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
+    public static final RegistryObject<Item> GROUND_CHAMOMILE_ITEM = ITEMS.register("ground_chamomile", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
 
     // ---------------------------------------------------------------------------------
-    // MORTAR_AND_PESTLE
+    // FUNCTIONAL BLOCKS
     public static final RegistryObject<Block> MORTAR_AND_PESTLE = BLOCKS.register("mortar_and_pestle", () -> new MortarAndPestleBlock(
             Block.Properties
                     .of(Material.STONE)
@@ -106,9 +113,8 @@ public class HerbalisMod
                     .sound(SoundType.STONE)
                     .noOcclusion()));
     public static final RegistryObject<Item> MORTAR_AND_PESTLE_ITEM = ITEMS.register("mortar_and_pestle", () -> new BlockItem(MORTAR_AND_PESTLE.get(), new Item.Properties().tab(HERBALIS_TAB)));
+    public static final RegistryObject<BlockEntityType<MortarAndPestleBlockEntity>> MORTAR_BE = BLOCK_ENTITIES.register("mortar_and_pestle", () -> BlockEntityType.Builder.of(MortarAndPestleBlockEntity::new, MORTAR_AND_PESTLE.get()).build(null));
 
-    // ---------------------------------------------------------------------------------
-    // DRYING_RACK
     public static final RegistryObject<Block> DRYING_RACK = BLOCKS.register("drying_rack", () -> new DryingRackBlock(
             Block.Properties
                     .of(Material.WOOD)
@@ -170,7 +176,6 @@ public class HerbalisMod
         {
             // Some client setup code
             LOGGER.info("HELLO FROM CLIENT SETUP");
-            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
             ItemBlockRenderTypes.setRenderLayer(PLANTAGO_BLOCK.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(MORTAR_AND_PESTLE.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(CHAMOMILE_BLOCK.get(), RenderType.cutout());
@@ -180,6 +185,7 @@ public class HerbalisMod
         @SubscribeEvent
         public static void registerRenderers(net.minecraftforge.client.event.EntityRenderersEvent.RegisterRenderers event) {
             event.registerBlockEntityRenderer(DRYING_RACK_BE.get(), DryingRackBlockEntityRenderer::new);
+            event.registerBlockEntityRenderer(MORTAR_BE.get(), MortarAndPestleBlockEntityRenderer::new);
         }
     }
 }

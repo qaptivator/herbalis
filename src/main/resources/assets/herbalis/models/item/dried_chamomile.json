@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "herbalis:item/dried_plantago_leaf"
+    "layer0": "herbalis:item/dried_chamomile"
   }
 }

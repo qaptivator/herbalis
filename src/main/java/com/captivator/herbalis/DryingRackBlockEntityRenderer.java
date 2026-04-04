@@ -2,7 +2,6 @@ package com.captivator.herbalis;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -12,15 +11,16 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 
 public class DryingRackBlockEntityRenderer implements BlockEntityRenderer<DryingRackBlockEntity> {
+    private final ItemRenderer itemRenderer;
+
     public DryingRackBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
+        this.itemRenderer = context.getItemRenderer();
     }
 
     @Override
     public void render(DryingRackBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLight, int combinedOverlay) {
         ItemStack stack = blockEntity.getItem();
         if (stack.isEmpty()) return;
-
-        ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
 
         poseStack.pushPose();
         
@@ -46,7 +46,7 @@ public class DryingRackBlockEntityRenderer implements BlockEntityRenderer<Drying
         // Scale down for the rack
         poseStack.scale(0.5f, 0.5f, 0.5f);
 
-        itemRenderer.renderStatic(stack, ItemTransforms.TransformType.FIXED, combinedLight, combinedOverlay, poseStack, bufferSource, (int) blockEntity.getBlockPos().asLong());
+        this.itemRenderer.renderStatic(stack, ItemTransforms.TransformType.FIXED, combinedLight, combinedOverlay, poseStack, bufferSource, (int) blockEntity.getBlockPos().asLong());
 
         poseStack.popPose();
     }

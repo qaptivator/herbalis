@@ -5,7 +5,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -16,7 +15,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class DryingRackBlockEntity extends BlockEntity {
+public class MortarAndPestleBlockEntity extends BlockEntity {
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -24,16 +23,15 @@ public class DryingRackBlockEntity extends BlockEntity {
             if (level != null && !level.isClientSide) {
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
-            dryingProgress = 0;
+            grindCount = 0;
         }
     };
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.of(() -> itemHandler);
-    private int dryingProgress = 0;
-    private static final int DRYING_TIME = 200; // 10 seconds
+    private int grindCount = 0;
 
-    public DryingRackBlockEntity(BlockPos pos, BlockState state) {
-        super(HerbalisMod.DRYING_RACK_BE.get(), pos, state);
+    public MortarAndPestleBlockEntity(BlockPos pos, BlockState state) {
+        super(HerbalisMod.MORTAR_BE.get(), pos, state);
     }
 
     public ItemStack getItem() {
@@ -42,6 +40,15 @@ public class DryingRackBlockEntity extends BlockEntity {
 
     public void setItem(ItemStack stack) {
         itemHandler.setStackInSlot(0, stack);
+    }
+
+    public int getGrindCount() {
+        return grindCount;
+    }
+
+    public void incrementGrindCount() {
+        grindCount++;
+        setChanged();
     }
 
     @Override
@@ -62,14 +69,14 @@ public class DryingRackBlockEntity extends BlockEntity {
     public void load(CompoundTag nbt) {
         super.load(nbt);
         itemHandler.deserializeNBT(nbt.getCompound("inventory"));
-        dryingProgress = nbt.getInt("dryingProgress");
+        grindCount = nbt.getInt("grindCount");
     }
 
     @Override
     protected void saveAdditional(CompoundTag nbt) {
         super.saveAdditional(nbt);
         nbt.put("inventory", itemHandler.serializeNBT());
-        nbt.putInt("dryingProgress", dryingProgress);
+        nbt.putInt("grindCount", grindCount);
     }
 
     @Override
@@ -83,37 +90,5 @@ public class DryingRackBlockEntity extends BlockEntity {
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
-    }
-
-    public static void tick(Level level, BlockPos pos, BlockState state, DryingRackBlockEntity blockEntity) {
-        if (level.isClientSide) return;
-
-        ItemStack stack = blockEntity.getItem();
-        if (!stack.isEmpty()) {
-            if (isDryable(stack)) {
-                blockEntity.dryingProgress++;
-                if (blockEntity.dryingProgress >= DRYING_TIME) {
-                    blockEntity.dryItem();
-                    blockEntity.dryingProgress = 0;
-                }
-            } else {
-                blockEntity.dryingProgress = 0;
-            }
-        } else {
-            blockEntity.dryingProgress = 0;
-        }
-    }
-
-    private static boolean isDryable(ItemStack stack) {
-        return stack.is(HerbalisMod.PLANTAGO_LEAF_ITEM.get()) || stack.is(HerbalisMod.CHAMOMILE_FLOWERS_ITEM.get());
-    }
-
-    private void dryItem() {
-        ItemStack stack = getItem();
-        if (stack.is(HerbalisMod.PLANTAGO_LEAF_ITEM.get())) {
-            setItem(new ItemStack(HerbalisMod.DRIED_PLANTAGO_ITEM.get(), stack.getCount()));
-        } else if (stack.is(HerbalisMod.CHAMOMILE_FLOWERS_ITEM.get())) {
-            setItem(new ItemStack(HerbalisMod.DRIED_CHAMOMILE_ITEM.get(), stack.getCount()));
-        }
     }
 }
