@@ -32,11 +32,11 @@ public class DryingRackBlockEntityRenderer implements BlockEntityRenderer<Drying
         // Rotate based on facing
         float rotation = 0f;
         switch (facing) {
-            case SOUTH: rotation = 180f; break;
-            case WEST: rotation = 90f; break;
-            case EAST: rotation = -90f; break;
+            case SOUTH: rotation = 0; break;
+            case WEST: rotation = -90f; break;
+            case EAST: rotation = 90f; break;
             case NORTH:
-            default: rotation = 0f; break;
+            default: rotation = 180f; break;
         }
         poseStack.mulPose(Vector3f.YP.rotationDegrees(rotation));
 

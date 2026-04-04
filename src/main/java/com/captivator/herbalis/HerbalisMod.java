@@ -92,6 +92,7 @@ public class HerbalisMod
             items.add(new ItemStack(GROUND_CHAMOMILE_ITEM.get()));
             items.add(new ItemStack(UNFIRED_CUP_ITEM.get()));
             items.add(new ItemStack(CERAMIC_CUP_ITEM.get()));
+            items.add(new ItemStack(LEATHER_PIECE_ITEM.get()));
             items.add(new ItemStack(MORTAR_AND_PESTLE_ITEM.get()));
             items.add(new ItemStack(DRYING_RACK_ITEM.get()));
         }
