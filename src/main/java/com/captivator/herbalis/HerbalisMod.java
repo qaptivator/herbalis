@@ -204,7 +204,7 @@ public class HerbalisMod
                         if (!player.getInventory().add(result)) {
                             player.drop(result, false);
                         }
-                        level.playSound(null, pos, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
+                        level.playSound(null, pos, SoundEvents.MUD_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
                     }
                     event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide));
                     event.setCanceled(true);

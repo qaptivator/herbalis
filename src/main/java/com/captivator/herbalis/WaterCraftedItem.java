@@ -29,7 +29,7 @@ public class WaterCraftedItem extends Item {
             entity.level.addFreshEntity(newEntity);
             
             entity.level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), 
-                SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
+                SoundEvents.MUD_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
             
             entity.discard();
             return true;
