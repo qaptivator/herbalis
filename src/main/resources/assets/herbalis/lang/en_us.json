@@ -13,5 +13,5 @@
   "item.herbalis.ground_chamomile": "Ground Chamomile",
   "block.herbalis.mortar_and_pestle": "Mortar and Pestle",
   "block.herbalis.drying_rack": "Drying Rack",
-  "item.herbalis.water_block_visual": "Drop this into water!"
+  "item.herbalis.water_crafted_visual": "Drop this into water!"
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "herbalis:item/water_block_visual"
+    "layer0": "herbalis:item/water_crafted_visual"
   }
 }

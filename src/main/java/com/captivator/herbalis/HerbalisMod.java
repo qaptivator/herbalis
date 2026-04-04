@@ -151,7 +151,7 @@ public class HerbalisMod
     // ---------------------------------------------------------------------------------
     // MISC
     //public static final RegistryObject<Item> WATER_BLOCK_VISUAL = ITEMS.register("water_block_visual", () -> new TooltipItem(new Item.Properties().craftRemainder(ItemStack.EMPTY.getItem()), "item.herbalis.water_block_visual.tooltip"));
-    public static final RegistryObject<Item> WATER_BLOCK_VISUAL = ITEMS.register("water_block_visual", () -> new Item(new Item.Properties().craftRemainder(ItemStack.EMPTY.getItem())));
+    public static final RegistryObject<Item> WATER_CRAFTED_VISUAL = ITEMS.register("water_crafted_visual", () -> new Item(new Item.Properties()));
 
     public HerbalisMod(FMLJavaModLoadingContext context)
     {
