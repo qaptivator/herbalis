@@ -82,6 +82,12 @@ public class MortarAndPestleBlock extends Block implements EntityBlock {
             } else {
                 if (stackInMortar.isEmpty()) {
                     mortar.setItem(stackInHand.split(1));
+                } else if (ItemStack.isSameItemSameTags(stackInHand, stackInMortar) && stackInHand.getCount() < stackInHand.getMaxStackSize()) {
+                    // If holding same item and has space, grab from mortar
+                    int toAdd = Math.min(stackInMortar.getCount(), stackInHand.getMaxStackSize() - stackInHand.getCount());
+                    stackInHand.grow(toAdd);
+                    stackInMortar.shrink(toAdd);
+                    mortar.setItem(stackInMortar.isEmpty() ? ItemStack.EMPTY : stackInMortar);
                 } else {
                     // Swap
                     ItemStack temp = stackInMortar.copy();

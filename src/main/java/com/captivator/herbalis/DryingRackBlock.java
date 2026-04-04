@@ -73,6 +73,13 @@ public class DryingRackBlock extends Block implements EntityBlock {
                     if (stackInRack.isEmpty()) {
                         dryingRack.setItem(stackInHand.split(1));
                         return InteractionResult.SUCCESS;
+                    } else if (ItemStack.isSameItemSameTags(stackInHand, stackInRack) && stackInHand.getCount() < stackInHand.getMaxStackSize()) {
+                        // If holding same item and has space, grab from rack
+                        int toAdd = Math.min(stackInRack.getCount(), stackInHand.getMaxStackSize() - stackInHand.getCount());
+                        stackInHand.grow(toAdd);
+                        stackInRack.shrink(toAdd);
+                        dryingRack.setItem(stackInRack.isEmpty() ? ItemStack.EMPTY : stackInRack);
+                        return InteractionResult.SUCCESS;
                     } else {
                         // Swap logic
                         ItemStack temp = stackInRack.copy();

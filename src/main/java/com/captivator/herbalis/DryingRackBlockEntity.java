@@ -105,15 +105,18 @@ public class DryingRackBlockEntity extends BlockEntity {
     }
 
     private static boolean isDryable(ItemStack stack) {
-        return stack.is(HerbalisMod.PLANTAGO_LEAF_ITEM.get()) || stack.is(HerbalisMod.CHAMOMILE_FLOWERS_ITEM.get());
+        return stack.is(HerbalisMod.PLANTAGO_LEAF_ITEM.get()) || stack.is(HerbalisMod.CHAMOMILE_FLOWERS_ITEM.get()) || stack.is(net.minecraft.world.item.Items.ROTTEN_FLESH);
     }
 
     private void dryItem() {
         ItemStack stack = getItem();
+        int count = stack.getCount();
         if (stack.is(HerbalisMod.PLANTAGO_LEAF_ITEM.get())) {
-            setItem(new ItemStack(HerbalisMod.DRIED_PLANTAGO_ITEM.get(), stack.getCount()));
+            setItem(new ItemStack(HerbalisMod.DRIED_PLANTAGO_ITEM.get(), count));
         } else if (stack.is(HerbalisMod.CHAMOMILE_FLOWERS_ITEM.get())) {
-            setItem(new ItemStack(HerbalisMod.DRIED_CHAMOMILE_ITEM.get(), stack.getCount()));
+            setItem(new ItemStack(HerbalisMod.DRIED_CHAMOMILE_ITEM.get(), count));
+        } else if (stack.is(net.minecraft.world.item.Items.ROTTEN_FLESH)) {
+            setItem(new ItemStack(HerbalisMod.LEATHER_PIECE_ITEM.get(), count));
         }
     }
 }
