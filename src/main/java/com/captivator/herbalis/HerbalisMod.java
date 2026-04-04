@@ -27,9 +27,27 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
-
+import javax.annotation.Nullable;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import java.util.ArrayList;
 import java.util.List;
+
+class TooltipItem extends Item {
+    private final String tooltipKey;
+
+    public TooltipItem(Properties props, String tooltipKey) {
+        super(props);
+        this.tooltipKey = tooltipKey;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+        tooltip.add(Component.translatable(this.tooltipKey).withStyle(ChatFormatting.AQUA));
+    }
+}
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(HerbalisMod.MODID)
@@ -124,6 +142,10 @@ public class HerbalisMod
     public static final RegistryObject<Item> DRYING_RACK_ITEM = ITEMS.register("drying_rack", () -> new BlockItem(DRYING_RACK.get(), new Item.Properties().tab(HERBALIS_TAB)));
 
     public static final RegistryObject<BlockEntityType<DryingRackBlockEntity>> DRYING_RACK_BE = BLOCK_ENTITIES.register("drying_rack", () -> BlockEntityType.Builder.of(DryingRackBlockEntity::new, DRYING_RACK.get()).build(null));
+
+    // ---------------------------------------------------------------------------------
+    // MISC
+    public static final RegistryObject<Item> WATER_BLOCK_VISUAL = ITEMS.register("water_block_visual", () -> new TooltipItem(new Item.Properties(), "item.herbalis.water_block_visual.tooltip"));
 
     public HerbalisMod(FMLJavaModLoadingContext context)
     {
