@@ -7,7 +7,6 @@
     "#": { "tag": "minecraft:wooden_slabs" }
   },
   "result": {
-    "item": "herbalis:drying_rack",
-    "count": 1
+    "item": "herbalis:drying_rack"
   }
 }

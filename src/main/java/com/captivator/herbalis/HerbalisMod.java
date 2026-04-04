@@ -4,18 +4,17 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleRecipeSerializer;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -39,7 +38,6 @@ import org.slf4j.Logger;
 import javax.annotation.Nullable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +46,7 @@ import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.core.BlockPos;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -91,6 +90,8 @@ public class HerbalisMod
             items.add(new ItemStack(DRIED_CHAMOMILE_ITEM.get()));
             items.add(new ItemStack(MASHED_CHAMOMILE_ITEM.get()));
             items.add(new ItemStack(GROUND_CHAMOMILE_ITEM.get()));
+            items.add(new ItemStack(UNFIRED_CUP_ITEM.get()));
+            items.add(new ItemStack(CERAMIC_CUP_ITEM.get()));
             items.add(new ItemStack(MORTAR_AND_PESTLE_ITEM.get()));
             items.add(new ItemStack(DRYING_RACK_ITEM.get()));
         }
@@ -108,7 +109,24 @@ public class HerbalisMod
     public static final RegistryObject<Item> PLANTAGO_BLOCK_ITEM = ITEMS.register("plantago", () -> new BlockItem(PLANTAGO_BLOCK.get(), new Item.Properties().tab(HERBALIS_TAB)));
     public static final RegistryObject<Item> PLANTAGO_LEAF_ITEM = ITEMS.register("plantago_leaf", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
     public static final RegistryObject<Item> DRIED_PLANTAGO_ITEM = ITEMS.register("dried_plantago", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
-    public static final RegistryObject<Item> PLANTAGO_POULTICE = ITEMS.register("plantago_poultice", () -> new Item(new Item.Properties().tab(HERBALIS_TAB).food(new FoodProperties.Builder().alwaysEat().effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 200, 0), 1.0F).build())));
+    public static final RegistryObject<Item> PLANTAGO_POULTICE = ITEMS.register("plantago_poultice", () -> new Item(new Item.Properties().tab(HERBALIS_TAB).food(new FoodProperties.Builder().alwaysEat().effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 200, 0), 1.0F).build())) {
+        @Override
+        public UseAnim getUseAnimation(ItemStack stack) {
+            return UseAnim.BOW;
+        }
+        // this doesnt work when the use anim isnt eat or drink lol
+        /*@Override
+        public SoundEvent getEatingSound() {
+            return SoundEvents.GRASS_HIT;
+        }*/
+        @Override
+        public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int count) {
+            // Play the sound every 4 ticks (0.2 seconds) to simulate "applying" the leaf
+            if (count % 4 == 0 && level.isClientSide) {
+                entity.playSound(SoundEvents.GRASS_HIT, 1F, 0.8F + level.random.nextFloat() * 0.4F);
+            }
+        }
+    });
     public static final RegistryObject<Item> MASHED_PLANTAGO_ITEM = ITEMS.register("mashed_plantago", () -> new WaterCraftedItem(new Item.Properties().tab(HERBALIS_TAB), PLANTAGO_POULTICE));
     public static final RegistryObject<Item> GROUND_PLANTAGO_ITEM = ITEMS.register("ground_plantago", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
 
@@ -126,6 +144,11 @@ public class HerbalisMod
     public static final RegistryObject<Item> DRIED_CHAMOMILE_ITEM = ITEMS.register("dried_chamomile", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
     public static final RegistryObject<Item> MASHED_CHAMOMILE_ITEM = ITEMS.register("mashed_chamomile", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
     public static final RegistryObject<Item> GROUND_CHAMOMILE_ITEM = ITEMS.register("ground_chamomile", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
+
+    // ---------------------------------------------------------------------------------
+    // CERAMIC CUP
+    public static final RegistryObject<Item> UNFIRED_CUP_ITEM = ITEMS.register("unfired_cup", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
+    public static final RegistryObject<Item> CERAMIC_CUP_ITEM = ITEMS.register("ceramic_cup", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
 
     // ---------------------------------------------------------------------------------
     // FUNCTIONAL BLOCKS

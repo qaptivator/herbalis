@@ -2,12 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "# #",
-    "###"
+    " # "
   ],
   "key": {
-    "#": { "item": "minecraft:cobbled_deepslate" }
+    "#": { "item": "minecraft:clay_ball" }
   },
   "result": {
-    "item": "herbalis:mortar_and_pestle"
+    "item": "herbalis:unfired_cup",
+    "count": 3
   }
 }
