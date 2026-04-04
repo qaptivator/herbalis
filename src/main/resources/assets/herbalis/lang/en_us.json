@@ -1,10 +1,11 @@
 {
-  "itemGroup.herbalis": "Herbalis"
+  "itemGroup.herbalis": "Herbalis",
   "block.herbalis.plantago": "Plantago",
   "item.herbalis.plantago_leaf": "Plantago Leaf",
   "item.herbalis.dried_plantago": "Dried Plantago",
   "item.herbalis.mashed_plantago": "Mashed Plantago",
   "item.herbalis.ground_plantago": "Ground Plantago",
+  "item.herbalis.plantago_poultice": "Plantago Poultice",
   "block.herbalis.chamomile": "Chamomile",
   "item.herbalis.chamomile_flowers": "Chamomile Flowers",
   "item.herbalis.dried_chamomile": "Dried Chamomile",
@@ -12,6 +13,5 @@
   "item.herbalis.ground_chamomile": "Ground Chamomile",
   "block.herbalis.mortar_and_pestle": "Mortar and Pestle",
   "block.herbalis.drying_rack": "Drying Rack",
-  "item.herbalis.water_block_visual": "Water Block Visual",
-  "item.herbalis.water_block_visual.tooltip": "Drop this into water!"
+  "item.herbalis.water_block_visual": "Drop this into water!"
 }

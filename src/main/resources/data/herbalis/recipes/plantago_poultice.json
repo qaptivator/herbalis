@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "herbalis:mashed_plantago"
+    },
+    {
+      "item": "herbalis:water_block_visual"
+    }
+  ],
+  "result": {
+    "item": "herbalis:plantago_poultice"
+  }
+}

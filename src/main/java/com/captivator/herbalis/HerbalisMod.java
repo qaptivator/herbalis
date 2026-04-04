@@ -3,6 +3,15 @@ package com.captivator.herbalis;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.SimpleRecipeSerializer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -34,20 +43,12 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import java.util.ArrayList;
 import java.util.List;
-
-class TooltipItem extends Item {
-    private final String tooltipKey;
-
-    public TooltipItem(Properties props, String tooltipKey) {
-        super(props);
-        this.tooltipKey = tooltipKey;
-    }
-
-    @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-        tooltip.add(Component.translatable(this.tooltipKey).withStyle(ChatFormatting.AQUA));
-    }
-}
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.level.block.LayeredCauldronBlock;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.core.BlockPos;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(HerbalisMod.MODID)
@@ -63,6 +64,8 @@ public class HerbalisMod
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     // Create a Deferred Register to hold Block Entities
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MODID);
+
+   //public static final TagKey<Item> WATER_CRAFTABLE = ItemTags.create(new ResourceLocation(MODID, "water_craftable"));
 
     // Creates a new Block with the id "examplemod:example_block", combining the namespace and path
     //public static final RegistryObject<Block> EXAMPLE_BLOCK = BLOCKS.register("example_block", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)));
@@ -82,6 +85,7 @@ public class HerbalisMod
             items.add(new ItemStack(DRIED_PLANTAGO_ITEM.get()));
             items.add(new ItemStack(MASHED_PLANTAGO_ITEM.get()));
             items.add(new ItemStack(GROUND_PLANTAGO_ITEM.get()));
+            items.add(new ItemStack(PLANTAGO_POULTICE.get()));
             items.add(new ItemStack(CHAMOMILE_BLOCK_ITEM.get()));
             items.add(new ItemStack(CHAMOMILE_FLOWERS_ITEM.get()));
             items.add(new ItemStack(DRIED_CHAMOMILE_ITEM.get()));
@@ -104,8 +108,9 @@ public class HerbalisMod
     public static final RegistryObject<Item> PLANTAGO_BLOCK_ITEM = ITEMS.register("plantago", () -> new BlockItem(PLANTAGO_BLOCK.get(), new Item.Properties().tab(HERBALIS_TAB)));
     public static final RegistryObject<Item> PLANTAGO_LEAF_ITEM = ITEMS.register("plantago_leaf", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
     public static final RegistryObject<Item> DRIED_PLANTAGO_ITEM = ITEMS.register("dried_plantago", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
-    public static final RegistryObject<Item> MASHED_PLANTAGO_ITEM = ITEMS.register("mashed_plantago", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
+    public static final RegistryObject<Item> MASHED_PLANTAGO_ITEM = ITEMS.register("mashed_plantago", () -> new WaterCraftedItem(new Item.Properties().tab(HERBALIS_TAB), PLANTAGO_POULTICE));
     public static final RegistryObject<Item> GROUND_PLANTAGO_ITEM = ITEMS.register("ground_plantago", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
+    public static final RegistryObject<Item> PLANTAGO_POULTICE = ITEMS.register("plantago_poultice", () -> new Item(new Item.Properties().tab(HERBALIS_TAB).food(new FoodProperties.Builder().alwaysEat().effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 200, 0), 1.0F).build())));
 
     // ---------------------------------------------------------------------------------
     // CHAMOMILE
@@ -145,7 +150,8 @@ public class HerbalisMod
 
     // ---------------------------------------------------------------------------------
     // MISC
-    public static final RegistryObject<Item> WATER_BLOCK_VISUAL = ITEMS.register("water_block_visual", () -> new TooltipItem(new Item.Properties(), "item.herbalis.water_block_visual.tooltip"));
+    //public static final RegistryObject<Item> WATER_BLOCK_VISUAL = ITEMS.register("water_block_visual", () -> new TooltipItem(new Item.Properties().craftRemainder(ItemStack.EMPTY.getItem()), "item.herbalis.water_block_visual.tooltip"));
+    public static final RegistryObject<Item> WATER_BLOCK_VISUAL = ITEMS.register("water_block_visual", () -> new Item(new Item.Properties().craftRemainder(ItemStack.EMPTY.getItem())));
 
     public HerbalisMod(FMLJavaModLoadingContext context)
     {
@@ -166,6 +172,45 @@ public class HerbalisMod
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         context.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+    }
+
+    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+    public static class ForgeEvents {
+        @SubscribeEvent
+        public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+            Level level = event.getLevel();
+            BlockPos pos = event.getPos();
+            BlockState state = level.getBlockState(pos);
+            ItemStack stack = event.getItemStack();
+            Player player = event.getEntity();
+
+            if (stack.getItem() instanceof WaterCraftedItem waterItem) {
+                boolean created = false;
+                if (state.is(Blocks.WATER) || state.getFluidState().isSource()) {
+                    created = true;
+                } else if (state.getBlock() instanceof LayeredCauldronBlock && state.getValue(LayeredCauldronBlock.LEVEL) > 0) {
+                    if (!level.isClientSide) {
+                        LayeredCauldronBlock.lowerFillLevel(state, level, pos);
+                    }
+                    created = true;
+                }
+
+                if (created) {
+                    if (!level.isClientSide) {
+                        ItemStack result = new ItemStack(waterItem.getResult());
+                        if (!player.getAbilities().instabuild) {
+                            stack.shrink(1);
+                        }
+                        if (!player.getInventory().add(result)) {
+                            player.drop(result, false);
+                        }
+                        level.playSound(null, pos, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    }
+                    event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide));
+                    event.setCanceled(true);
+                }
+            }
+        }
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
