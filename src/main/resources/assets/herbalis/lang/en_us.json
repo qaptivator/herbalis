@@ -1,5 +1,11 @@
 {
   "block.herbalis.plantago": "Plantago",
   "item.herbalis.plantago_leaf": "Plantago Leaf",
-  "block.herbalis.mortar_and_pestle": "Mortar and Pestle"
+  "block.herbalis.mortar_and_pestle": "Mortar and Pestle",
+  "block.herbalis.chamomile": "Chamomile",
+  "item.herbalis.chamomile_flowers": "Chamomile Flowers",
+  "item.herbalis.dried_plantago_leaf": "Dried Plantago Leaf",
+  "item.herbalis.dried_chamomile_flowers": "Dried Chamomile Flowers",
+  "itemGroup.herbalis": "Herbalis",
+  "block.herbalis.drying_rack": "Drying Rack"
 }

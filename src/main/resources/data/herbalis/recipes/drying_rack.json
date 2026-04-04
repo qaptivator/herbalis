@@ -1,15 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "   ",
-    "# #",
     "###"
   ],
   "key": {
-    "#": { "item": "minecraft:cobbled_deepslate" }
+    "#": { "tag": "minecraft:wooden_slabs" }
   },
   "result": {
-    "item": "herbalis:mortar_and_pestle",
+    "item": "herbalis:drying_rack",
     "count": 1
   }
 }

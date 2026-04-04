@@ -9,6 +9,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
@@ -43,14 +44,35 @@ public class HerbalisMod
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     // Create a Deferred Register to hold Items which will all be registered under the "examplemod" namespace
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
+    // Create a Deferred Register to hold Block Entities
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MODID);
 
     // Creates a new Block with the id "examplemod:example_block", combining the namespace and path
-    public static final RegistryObject<Block> EXAMPLE_BLOCK = BLOCKS.register("example_block", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)));
+    //public static final RegistryObject<Block> EXAMPLE_BLOCK = BLOCKS.register("example_block", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)));
     // Creates a new BlockItem with the id "examplemod:example_block", combining the namespace and path
-    public static final RegistryObject<Item> EXAMPLE_BLOCK_ITEM = ITEMS.register("example_block", () -> new BlockItem(EXAMPLE_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+    //public static final RegistryObject<Item> EXAMPLE_BLOCK_ITEM = ITEMS.register("example_block", () -> new BlockItem(EXAMPLE_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 
+    public static final CreativeModeTab HERBALIS_TAB = new CreativeModeTab("herbalis") {
+        @Override
+        public ItemStack makeIcon() {
+            return new ItemStack(PLANTAGO_LEAF_ITEM.get());
+        }
+
+        @Override
+        public void fillItemList(net.minecraft.core.NonNullList<ItemStack> items) {
+            items.add(new ItemStack(PLANTAGO_BLOCK_ITEM.get()));
+            items.add(new ItemStack(PLANTAGO_LEAF_ITEM.get()));
+            items.add(new ItemStack(DRIED_PLANTAGO_LEAF_ITEM.get()));
+            items.add(new ItemStack(CHAMOMILE_BLOCK_ITEM.get()));
+            items.add(new ItemStack(CHAMOMILE_FLOWERS_ITEM.get()));
+            items.add(new ItemStack(DRIED_CHAMOMILE_FLOWERS_ITEM.get()));
+            items.add(new ItemStack(MORTAR_AND_PESTLE_ITEM.get()));
+            items.add(new ItemStack(DRYING_RACK_ITEM.get()));
+        }
+    };
+
+    // ---------------------------------------------------------------------------------
     // PLANTAGO
-    public static final RegistryObject<Item> PLANTAGO_LEAF_ITEM = ITEMS.register("plantago_leaf", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
     public static final RegistryObject<Block> PLANTAGO_BLOCK = BLOCKS.register("plantago", () -> new BushBlock(
             Block.Properties
             .of(Material.PLANT)
@@ -58,8 +80,24 @@ public class HerbalisMod
             .instabreak()
             .sound(SoundType.GRASS)
             .offsetType(BlockBehaviour.OffsetType.XZ)));
-    public static final RegistryObject<Item> PLANTAGO_BLOCK_ITEM = ITEMS.register("plantago", () -> new BlockItem(PLANTAGO_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> PLANTAGO_BLOCK_ITEM = ITEMS.register("plantago", () -> new BlockItem(PLANTAGO_BLOCK.get(), new Item.Properties().tab(HERBALIS_TAB)));
+    public static final RegistryObject<Item> PLANTAGO_LEAF_ITEM = ITEMS.register("plantago_leaf", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
+    public static final RegistryObject<Item> DRIED_PLANTAGO_LEAF_ITEM = ITEMS.register("dried_plantago_leaf", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
 
+    // ---------------------------------------------------------------------------------
+    // CHAMOMILE
+    public static final RegistryObject<Block> CHAMOMILE_BLOCK = BLOCKS.register("chamomile", () -> new BushBlock(
+            Block.Properties
+                    .of(Material.PLANT)
+                    .noCollission()
+                    .instabreak()
+                    .sound(SoundType.GRASS)
+                    .offsetType(BlockBehaviour.OffsetType.XZ)));
+    public static final RegistryObject<Item> CHAMOMILE_BLOCK_ITEM = ITEMS.register("chamomile", () -> new BlockItem(CHAMOMILE_BLOCK.get(), new Item.Properties().tab(HERBALIS_TAB)));
+    public static final RegistryObject<Item> CHAMOMILE_FLOWERS_ITEM = ITEMS.register("chamomile_flowers", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
+    public static final RegistryObject<Item> DRIED_CHAMOMILE_FLOWERS_ITEM = ITEMS.register("dried_chamomile_flowers", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
+
+    // ---------------------------------------------------------------------------------
     // MORTAR_AND_PESTLE
     public static final RegistryObject<Block> MORTAR_AND_PESTLE = BLOCKS.register("mortar_and_pestle", () -> new MortarAndPestleBlock(
             Block.Properties
@@ -67,7 +105,19 @@ public class HerbalisMod
                     .strength(0.5f)
                     .sound(SoundType.STONE)
                     .noOcclusion()));
-    public static final RegistryObject<Item> MORTAR_AND_PESTLE_ITEM = ITEMS.register("mortar_and_pestle", () -> new BlockItem(MORTAR_AND_PESTLE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> MORTAR_AND_PESTLE_ITEM = ITEMS.register("mortar_and_pestle", () -> new BlockItem(MORTAR_AND_PESTLE.get(), new Item.Properties().tab(HERBALIS_TAB)));
+
+    // ---------------------------------------------------------------------------------
+    // DRYING_RACK
+    public static final RegistryObject<Block> DRYING_RACK = BLOCKS.register("drying_rack", () -> new DryingRackBlock(
+            Block.Properties
+                    .of(Material.WOOD)
+                    .strength(0.5f)
+                    .sound(SoundType.WOOD)
+                    .noOcclusion()));
+    public static final RegistryObject<Item> DRYING_RACK_ITEM = ITEMS.register("drying_rack", () -> new BlockItem(DRYING_RACK.get(), new Item.Properties().tab(HERBALIS_TAB)));
+
+    public static final RegistryObject<BlockEntityType<DryingRackBlockEntity>> DRYING_RACK_BE = BLOCK_ENTITIES.register("drying_rack", () -> BlockEntityType.Builder.of(DryingRackBlockEntity::new, DRYING_RACK.get()).build(null));
 
     public HerbalisMod(FMLJavaModLoadingContext context)
     {
@@ -80,6 +130,8 @@ public class HerbalisMod
         BLOCKS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so items get registered
         ITEMS.register(modEventBus);
+        // Register the Deferred Register to the mod event bus so block entities get registered
+        BLOCK_ENTITIES.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
@@ -121,6 +173,13 @@ public class HerbalisMod
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
             ItemBlockRenderTypes.setRenderLayer(PLANTAGO_BLOCK.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(MORTAR_AND_PESTLE.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(CHAMOMILE_BLOCK.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(DRYING_RACK.get(), RenderType.cutout());
+        }
+
+        @SubscribeEvent
+        public static void registerRenderers(net.minecraftforge.client.event.EntityRenderersEvent.RegisterRenderers event) {
+            event.registerBlockEntityRenderer(DRYING_RACK_BE.get(), DryingRackBlockEntityRenderer::new);
         }
     }
 }

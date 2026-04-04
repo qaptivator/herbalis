@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "herbalis:block/drying_rack" },
+    "facing=south": { "model": "herbalis:block/drying_rack", "y": 180 },
+    "facing=west": { "model": "herbalis:block/drying_rack", "y": 270 },
+    "facing=east": { "model": "herbalis:block/drying_rack", "y": 90 }
+  }
+}

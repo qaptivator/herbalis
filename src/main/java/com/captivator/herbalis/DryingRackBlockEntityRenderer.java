@@ -1,0 +1,53 @@
+package com.captivator.herbalis;
+
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Vector3f;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.ItemStack;
+
+public class DryingRackBlockEntityRenderer implements BlockEntityRenderer<DryingRackBlockEntity> {
+    public DryingRackBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
+    }
+
+    @Override
+    public void render(DryingRackBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLight, int combinedOverlay) {
+        ItemStack stack = blockEntity.getItem();
+        if (stack.isEmpty()) return;
+
+        ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
+
+        poseStack.pushPose();
+        
+        Direction facing = blockEntity.getBlockState().getValue(DryingRackBlock.FACING);
+        
+        // Center of the block
+        poseStack.translate(0.5, 0.7, 0.5);
+
+        // Rotate based on facing
+        float rotation = 0f;
+        switch (facing) {
+            case SOUTH: rotation = 180f; break;
+            case WEST: rotation = 90f; break;
+            case EAST: rotation = -90f; break;
+            case NORTH:
+            default: rotation = 0f; break;
+        }
+        poseStack.mulPose(Vector3f.YP.rotationDegrees(rotation));
+
+        // Move to the rack surface (which is at the "North" side of the rotated space)
+        poseStack.translate(0.0, 0.0, -0.4);
+        
+        // Scale down for the rack
+        poseStack.scale(0.5f, 0.5f, 0.5f);
+
+        itemRenderer.renderStatic(stack, ItemTransforms.TransformType.FIXED, combinedLight, combinedOverlay, poseStack, bufferSource, (int) blockEntity.getBlockPos().asLong());
+
+        poseStack.popPose();
+    }
+}
