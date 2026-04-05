@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "half=lower": { "model": "herbalis:block/tall_nettle_bottom" },
+    "half=upper": { "model": "herbalis:block/tall_nettle_top" }
+  }
+}

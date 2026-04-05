@@ -91,7 +91,9 @@ public class HerbalisMod
             items.add(new ItemStack(MASHED_CHAMOMILE_ITEM.get()));
             items.add(new ItemStack(GROUND_CHAMOMILE_ITEM.get()));
             items.add(new ItemStack(NETTLE_BLOCK_ITEM.get()));
+            items.add(new ItemStack(TALL_NETTLE_BLOCK_ITEM.get()));
             items.add(new ItemStack(NETTLE_LEAF_ITEM.get()));
+            items.add(new ItemStack(VALERIAN_BLOCK_ITEM.get()));
             items.add(new ItemStack(UNFIRED_CUP_ITEM.get()));
             items.add(new ItemStack(CERAMIC_CUP_ITEM.get()));
             items.add(new ItemStack(LEATHER_PIECE_ITEM.get()));
@@ -99,6 +101,14 @@ public class HerbalisMod
             items.add(new ItemStack(DRYING_RACK_ITEM.get()));
         }
     };
+
+    // ---------------------------------------------------------------------------------
+    // TODO
+    // automate fillItemList
+    // do something with setRenderLayer
+    // add valerian (flowersd and roots. to get roots you must use a shovel as written below), mint (can be tall maybe), echinacea (can be tall maybe as well), yarrow, st. john's wort
+    // add wild carrots, potatoes (need digging up with a shovel on the block it stood on), beetroots (used for pH indicators for soil), then maybe flax
+    // better organize your code and maybe split herb definitions into different files since this is getting messy
 
     // ---------------------------------------------------------------------------------
     // PLANTAGO
@@ -159,6 +169,27 @@ public class HerbalisMod
                     .offsetType(BlockBehaviour.OffsetType.XZ)));
     public static final RegistryObject<Item> NETTLE_BLOCK_ITEM = ITEMS.register("nettle", () -> new BlockItem(NETTLE_BLOCK.get(), new Item.Properties().tab(HERBALIS_TAB)));
     public static final RegistryObject<Item> NETTLE_LEAF_ITEM = ITEMS.register("nettle_leaf", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
+    public static final RegistryObject<Block> TALL_NETTLE_BLOCK = BLOCKS.register("tall_nettle",
+            () -> new TallNettleBlock(BlockBehaviour.Properties.copy(Blocks.ROSE_BUSH)
+                    .noCollission()
+                    .instabreak()
+                    .sound(SoundType.GRASS)
+                    .offsetType(BlockBehaviour.OffsetType.XZ)
+            ));
+    public static final RegistryObject<Item> TALL_NETTLE_BLOCK_ITEM = ITEMS.register("tall_nettle",
+            () -> new DoubleHighBlockItem(TALL_NETTLE_BLOCK.get(),
+                    new Item.Properties().tab(HerbalisMod.HERBALIS_TAB)));
+
+    // ---------------------------------------------------------------------------------
+    // VALERIAN
+    public static final RegistryObject<Block> VALERIAN_BLOCK = BLOCKS.register("valerian", () -> new NettleBlock(
+            Block.Properties
+                    .of(Material.PLANT)
+                    .noCollission()
+                    .instabreak()
+                    .sound(SoundType.GRASS)
+                    .offsetType(BlockBehaviour.OffsetType.XZ)));
+    public static final RegistryObject<Item> VALERIAN_BLOCK_ITEM = ITEMS.register("valerian", () -> new BlockItem(VALERIAN_BLOCK.get(), new Item.Properties().tab(HERBALIS_TAB)));
 
     // ---------------------------------------------------------------------------------
     // CERAMIC CUP
@@ -287,6 +318,8 @@ public class HerbalisMod
             ItemBlockRenderTypes.setRenderLayer(CHAMOMILE_BLOCK.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(DRYING_RACK.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(NETTLE_BLOCK.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(TALL_NETTLE_BLOCK.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(VALERIAN_BLOCK.get(), RenderType.cutout());
         }
 
         @SubscribeEvent
