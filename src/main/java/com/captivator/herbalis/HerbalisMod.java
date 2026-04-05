@@ -90,6 +90,8 @@ public class HerbalisMod
             items.add(new ItemStack(DRIED_CHAMOMILE_ITEM.get()));
             items.add(new ItemStack(MASHED_CHAMOMILE_ITEM.get()));
             items.add(new ItemStack(GROUND_CHAMOMILE_ITEM.get()));
+            items.add(new ItemStack(NETTLE_BLOCK_ITEM.get()));
+            items.add(new ItemStack(NETTLE_LEAF_ITEM.get()));
             items.add(new ItemStack(UNFIRED_CUP_ITEM.get()));
             items.add(new ItemStack(CERAMIC_CUP_ITEM.get()));
             items.add(new ItemStack(LEATHER_PIECE_ITEM.get()));
@@ -145,6 +147,18 @@ public class HerbalisMod
     public static final RegistryObject<Item> DRIED_CHAMOMILE_ITEM = ITEMS.register("dried_chamomile", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
     public static final RegistryObject<Item> MASHED_CHAMOMILE_ITEM = ITEMS.register("mashed_chamomile", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
     public static final RegistryObject<Item> GROUND_CHAMOMILE_ITEM = ITEMS.register("ground_chamomile", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
+
+    // ---------------------------------------------------------------------------------
+    // NETTLE
+    public static final RegistryObject<Block> NETTLE_BLOCK = BLOCKS.register("nettle", () -> new NettleBlock(
+            Block.Properties
+                    .of(Material.PLANT)
+                    .noCollission()
+                    .instabreak()
+                    .sound(SoundType.GRASS)
+                    .offsetType(BlockBehaviour.OffsetType.XZ)));
+    public static final RegistryObject<Item> NETTLE_BLOCK_ITEM = ITEMS.register("nettle", () -> new BlockItem(NETTLE_BLOCK.get(), new Item.Properties().tab(HERBALIS_TAB)));
+    public static final RegistryObject<Item> NETTLE_LEAF_ITEM = ITEMS.register("nettle_leaf", () -> new Item(new Item.Properties().tab(HERBALIS_TAB)));
 
     // ---------------------------------------------------------------------------------
     // CERAMIC CUP
@@ -272,6 +286,7 @@ public class HerbalisMod
             ItemBlockRenderTypes.setRenderLayer(MORTAR_AND_PESTLE.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(CHAMOMILE_BLOCK.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(DRYING_RACK.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(NETTLE_BLOCK.get(), RenderType.cutout());
         }
 
         @SubscribeEvent
