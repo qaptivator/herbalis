@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -57,12 +58,11 @@ public class HerbalisMod
     public static final String MODID = "herbalis";
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
-    // Create a Deferred Register to hold Blocks which will all be registered under the "examplemod" namespace
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
-    // Create a Deferred Register to hold Items which will all be registered under the "examplemod" namespace
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
-    // Create a Deferred Register to hold Block Entities
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MODID);
+    public static final DeferredRegister<MobEffect> MOB_EFFECTS =
+            DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, "modid");
 
    //public static final TagKey<Item> WATER_CRAFTABLE = ItemTags.create(new ResourceLocation(MODID, "water_craftable"));
 
@@ -226,24 +226,27 @@ public class HerbalisMod
     //public static final RegistryObject<Item> WATER_BLOCK_VISUAL = ITEMS.register("water_block_visual", () -> new TooltipItem(new Item.Properties().craftRemainder(ItemStack.EMPTY.getItem()), "item.herbalis.water_block_visual.tooltip"));
     public static final RegistryObject<Item> WATER_CRAFTED_VISUAL = ITEMS.register("water_crafted_visual", () -> new Item(new Item.Properties()));
 
+    // ---------------------------------------------------------------------------------
+    // EFFECTS
+    /*public static final RegistryObject<MobEffect> MY_EFFECT =
+            MOB_EFFECTS.register("my_effect", () -> new MyCustomEffect(
+                    MobEffectCategory.BENEFICIAL, // or HARMFUL/NEUTRAL
+                    0x33AA33 // Particle color
+            ));*/
+
     public HerbalisMod(FMLJavaModLoadingContext context)
     {
         IEventBus modEventBus = context.getModEventBus();
 
-        // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
-        // Register the Deferred Register to the mod event bus so blocks get registered
         BLOCKS.register(modEventBus);
-        // Register the Deferred Register to the mod event bus so items get registered
         ITEMS.register(modEventBus);
-        // Register the Deferred Register to the mod event bus so block entities get registered
         BLOCK_ENTITIES.register(modEventBus);
+        MOB_EFFECTS.register(modEventBus);
 
-        // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
 
-        // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         context.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
