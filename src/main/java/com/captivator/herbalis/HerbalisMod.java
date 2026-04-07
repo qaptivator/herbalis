@@ -106,9 +106,12 @@ public class HerbalisMod
     // TODO
     // automate fillItemList
     // do something with setRenderLayer
-    // add valerian (flowersd and roots. to get roots you must use a shovel as written below), mint (can be tall maybe), echinacea (can be tall maybe as well), yarrow, st. john's wort
+    // add valerian (flowersd and roots. to get roots you must use a shovel as written below), mint (can be tall maybe), echinacea (can be tall maybe as well), yarrow, st. john's wort, cannabis/hemp, flax
     // add wild carrots, potatoes (need digging up with a shovel on the block it stood on), beetroots (used for pH indicators for soil), then maybe flax
     // better organize your code and maybe split herb definitions into different files since this is getting messy
+	// make your herb textures grayscale so they look okay in other biomes
+	// maybeee add jei support (although it did crash my minecraft, and i plan on using the "visual" blocks in the recipe book for indication, like that water crafting hint
+	// maybe try making the guide book using patchouli (you cant rly make it using a signed book since there are no images)
 
     // ---------------------------------------------------------------------------------
     // PLANTAGO
