@@ -1,4 +1,4 @@
-package com.captivator.herbalis;
+package com.captivator.herbalis.items;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;

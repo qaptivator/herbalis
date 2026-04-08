@@ -1,5 +1,7 @@
-package com.captivator.herbalis;
+package com.captivator.herbalis.blocks;
 
+import com.captivator.herbalis.registry.ModBlockEntities;
+import com.captivator.herbalis.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

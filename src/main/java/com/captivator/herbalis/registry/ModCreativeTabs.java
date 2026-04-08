@@ -1,4 +1,4 @@
-package com.captivator.herbalis;
+package com.captivator.herbalis.registry;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.CreativeModeTab;

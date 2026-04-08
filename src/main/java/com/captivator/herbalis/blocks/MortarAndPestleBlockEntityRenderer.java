@@ -1,4 +1,4 @@
-package com.captivator.herbalis;
+package com.captivator.herbalis.blocks;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;

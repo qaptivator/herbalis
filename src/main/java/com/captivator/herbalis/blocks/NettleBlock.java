@@ -1,4 +1,4 @@
-package com.captivator.herbalis;
+package com.captivator.herbalis.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;

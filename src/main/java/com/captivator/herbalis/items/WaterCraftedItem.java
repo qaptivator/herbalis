@@ -1,4 +1,4 @@
-package com.captivator.herbalis;
+package com.captivator.herbalis.items;
 
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;

@@ -1,5 +1,7 @@
-package com.captivator.herbalis;
+package com.captivator.herbalis.registry;
 
+import com.captivator.herbalis.HerbalisMod;
+import com.captivator.herbalis.items.WaterCraftedItem;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;

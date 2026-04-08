@@ -1,4 +1,4 @@
-package com.captivator.herbalis;
+package com.captivator.herbalis.effects;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;

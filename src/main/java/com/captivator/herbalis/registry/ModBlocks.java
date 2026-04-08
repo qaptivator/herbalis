@@ -1,5 +1,10 @@
-package com.captivator.herbalis;
+package com.captivator.herbalis.registry;
 
+import com.captivator.herbalis.*;
+import com.captivator.herbalis.blocks.DryingRackBlock;
+import com.captivator.herbalis.blocks.MortarAndPestleBlock;
+import com.captivator.herbalis.blocks.NettleBlock;
+import com.captivator.herbalis.blocks.TallNettleBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;

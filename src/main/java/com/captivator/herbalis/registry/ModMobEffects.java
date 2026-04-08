@@ -1,5 +1,7 @@
-package com.captivator.herbalis;
+package com.captivator.herbalis.registry;
 
+import com.captivator.herbalis.effects.BleedingEffect;
+import com.captivator.herbalis.HerbalisMod;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;

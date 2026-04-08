@@ -1,5 +1,8 @@
-package com.captivator.herbalis;
+package com.captivator.herbalis.registry;
 
+import com.captivator.herbalis.blocks.DryingRackBlockEntity;
+import com.captivator.herbalis.HerbalisMod;
+import com.captivator.herbalis.blocks.MortarAndPestleBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
