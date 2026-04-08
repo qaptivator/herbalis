@@ -132,7 +132,7 @@ public class DryingRackBlock extends Block implements EntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return level.isClientSide ? null : createTickerHelper(type, HerbalisMod.DRYING_RACK_BE.get(), DryingRackBlockEntity::tick);
+        return level.isClientSide ? null : createTickerHelper(type, ModBlockEntities.DRYING_RACK_BE.get(), DryingRackBlockEntity::tick);
     }
 
     @SuppressWarnings("unchecked")

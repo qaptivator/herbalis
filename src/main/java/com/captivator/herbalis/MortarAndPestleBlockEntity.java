@@ -31,7 +31,7 @@ public class MortarAndPestleBlockEntity extends BlockEntity {
     private int grindCount = 0;
 
     public MortarAndPestleBlockEntity(BlockPos pos, BlockState state) {
-        super(HerbalisMod.MORTAR_BE.get(), pos, state);
+        super(ModBlockEntities.MORTAR_BE.get(), pos, state);
     }
 
     public ItemStack getItem() {

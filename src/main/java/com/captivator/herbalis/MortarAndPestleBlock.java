@@ -105,17 +105,17 @@ public class MortarAndPestleBlock extends Block implements EntityBlock {
     }
 
     private boolean isGrindable(ItemStack stack) {
-        return stack.is(HerbalisMod.PLANTAGO_LEAF_ITEM.get()) ||
-               stack.is(HerbalisMod.DRIED_PLANTAGO_ITEM.get()) ||
-               stack.is(HerbalisMod.CHAMOMILE_FLOWERS_ITEM.get()) ||
-               stack.is(HerbalisMod.DRIED_CHAMOMILE_ITEM.get());
+        return stack.is(ModItems.PLANTAGO_LEAF_ITEM.get()) ||
+               stack.is(ModItems.DRIED_PLANTAGO_ITEM.get()) ||
+               stack.is(ModItems.CHAMOMILE_FLOWERS_ITEM.get()) ||
+               stack.is(ModItems.DRIED_CHAMOMILE_ITEM.get());
     }
 
     private ItemStack getGrindResult(ItemStack stack) {
-        if (stack.is(HerbalisMod.PLANTAGO_LEAF_ITEM.get())) return new ItemStack(HerbalisMod.MASHED_PLANTAGO_ITEM.get(), stack.getCount());
-        if (stack.is(HerbalisMod.DRIED_PLANTAGO_ITEM.get())) return new ItemStack(HerbalisMod.GROUND_PLANTAGO_ITEM.get(), stack.getCount());
-        if (stack.is(HerbalisMod.CHAMOMILE_FLOWERS_ITEM.get())) return new ItemStack(HerbalisMod.MASHED_CHAMOMILE_ITEM.get(), stack.getCount());
-        if (stack.is(HerbalisMod.DRIED_CHAMOMILE_ITEM.get())) return new ItemStack(HerbalisMod.GROUND_CHAMOMILE_ITEM.get(), stack.getCount());
+        if (stack.is(ModItems.PLANTAGO_LEAF_ITEM.get())) return new ItemStack(ModItems.MASHED_PLANTAGO_ITEM.get(), stack.getCount());
+        if (stack.is(ModItems.DRIED_PLANTAGO_ITEM.get())) return new ItemStack(ModItems.GROUND_PLANTAGO_ITEM.get(), stack.getCount());
+        if (stack.is(ModItems.CHAMOMILE_FLOWERS_ITEM.get())) return new ItemStack(ModItems.MASHED_CHAMOMILE_ITEM.get(), stack.getCount());
+        if (stack.is(ModItems.DRIED_CHAMOMILE_ITEM.get())) return new ItemStack(ModItems.GROUND_CHAMOMILE_ITEM.get(), stack.getCount());
         return stack;
     }
 
