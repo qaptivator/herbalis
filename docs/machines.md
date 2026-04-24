@@ -6,7 +6,9 @@ the apothecary lab relies on a series of functional blocks that transform raw ma
 
 ### Mortar & Pestle
 
-the entry-point for most botanical processing. it is a stone-tier block that handles manual grinding.
+the entry-point for most botanical processing. it is a stone-tier block that handles manual grinding. requires **deepslate/cobbled deepslate**, not just any stone, which makes this somewhat more rare/valuable but still quite easily obtainable.
+
+![recipe](assets/mortar-and-pestle-recipe.png)
 
 - **grinding:** right-click with a **Dried Herb** to produce **Herb Powder**.
 - **crushing:** right-click with a **Fresh Herb** to produce **Herb Mash**.
@@ -16,13 +18,17 @@ the entry-point for most botanical processing. it is a stone-tier block that han
 
 a wooden frame used for long-term stabilization of organic matter.
 
+![recipe](assets/drying-rack-recipe.png)
+
 - **function:** converts **Fresh Herb** to **Dried Herb**.
-- **logic:** requires a light level > 10 and air blocks above it.
-- **timer:** roughly 1 in-game day. if left in rain, the timer resets and the plant may turn into **Compost**.
+- **logic:** requires a light level > 10 and sky blocks near it. can be overwritten with campfirs below, so they can be used underground.
+- **timer:** roughly 1 in-game day. if left in rain, the timer resets and the plant may turn into **Compost**. some items take longer to dry.
 
 ### Basin
 
 the heart of the lab. unlike a vanilla cauldron, this requires a heat source (fire, magma, or a lit furnace) underneath it.
+
+![recipe](assets/basin-recipe.png)
 
 - **infusion:** water + **Herb Powder** = **Herb Tea**.
 - **decoction:** leaving **Herb Tea** to boil for an additional 5 minutes.
@@ -41,10 +47,10 @@ a copper distillation apparatus for high-level chemistry.
 
 a heavy mechanical press used for extraction and compression.
 
-- **oil/lard:** crushes seeds or animal fat into liquid bases.
+- **oil/lard:** crushes seeds or animal fat into liquid bases/oils.
 - **fiber processing:** crushes retted **Flax Stalks** into **Linen Fiber**.
 - **pill pressing:** compresses **Herb Powder** + **Sugar** into a **Herb Pastille**.
-- **juicing:** crushes fruits into juice for the **Fermentation Vat**.
+- **juicing:** crushes fruits into juice for the **Aging Barrel**.
 
 ### Sieve
 
