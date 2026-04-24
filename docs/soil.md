@@ -19,6 +19,50 @@ each soil block tracks hidden variables that affect the tick-rate and yield of y
 2.  **Nutrients** -- the "fuel" for growth. depleted every time a plant reaches a new growth stage.
 3.  **Compaction** -- walking on farmland "packs" the dirt. **Packed Soil** stops growth entirely. use a **Hoe** to till or a **Pitchfork** to aerate without destroying the plant.
 4.  **Drainage** -- determines how long the soil stays "moist" after rain or watering.
+5.
+
+## Climate & Temperature
+
+plants are sensitive to the ambient temperature of the biome. there are 5 distinct states:
+
+- **Freezing** -- (e.g., **Ice Spikes**, **Cold Oceans**). plants will turn into **Frozen Stalks** and break unless kept in a heated greenhouse. some exotic plants may like this climate.
+- **Cold** -- (e.g., **Taiga**, **Snowy Tundra**, **Underground**). growth is 50% slower. only hardy herbs (like **Pine**) grow normally here.
+- **Temperate** -- (e.g., **Plains**, **Forest**). the baseline for most medicinal plants.
+- **Hot** -- (e.g., **Jungle**, **Savanna**). growth is 25% faster, but soil dries out twice as quickly.
+- **Scorching** -- (e.g., **Desert**, **Nether**). plants will wilt and turn into **Dead Bushes** unless they are shaded and heavily watered. some exotic plants may like this climate.
+
+### Greenhouse Engineering
+
+to grow plants outside their natural climate, you must build a functional greenhouse.
+
+- **insulation:** the area must be enclosed with glass. this raises the internal temperature by +1 level (e.g., **Cold** becomes **Temperate**).
+- **artificial heating:** placing a lit **Furnace** or a **Campfire** inside a greenhouse raises the temperature by another +1 level. this allows you to grow tropical herbs in the middle of a winter biome.
+
+## Sunlight
+
+most medicinal herbs require high-intensity light to grow. if the sky light level at the plant is below 14, growth will slow, and the plant will eventually drop **Compost** instead of a harvest.
+
+### Light Shafts
+
+for underground labs, you must dig vertical shafts to the surface to bring in natural light. you can cap these shafts with **Glass** to prevent heat loss, turning your underground room into a subterranean greenhouse (although by default your underground room is also technically a greenhouse)
+
+### Reflectors & Mirror Bouncing
+
+if you cannot dig a direct shaft over your garden, you can use **Polished Reflectors** to redirect light around corners.
+
+- **mechanic:** place a reflector (made from polished **Copper** or **Silver**) at a 45-degree angle to bounce light from a vertical shaft into a horizontal room.
+- **efficiency:** each "bounce" reduces the light level. **Silver Reflectors** are more efficient and allow for longer light paths, while **Copper Reflectors** are cheaper but lose intensity faster.
+
+### Chemical Lighting
+
+as a last resort for deep bunkers, you can craft **Phosphorus Lamps**.
+
+- **logic:** these are glass globes filled with white phosphorus extracted from **Bone Meal** in the [Alembic](machines.md#Alembic).
+- **maintenance:** they provide a sky-light equivalent of 15 in a small radius but slowly consume their fuel. this is the only way to grow herbs in total darkness without surface access.
+
+## Buffering
+
+You can keep fertilizers, alkalis or acids on the soil, and it will pick up only how much is needed by the plant and soil. so, your herbs wont need constant attention.
 
 ---
 
@@ -29,6 +73,8 @@ each soil block tracks hidden variables that affect the tick-rate and yield of y
 first, boil **Beetroot** in a **Basin** to extract the natural pigments. then, crush **Paper** into **Paper Strips** using the **Mortar & Pestle**. finally, soak those strips in the beetroot juice to get **pH Indicators**.
 
 this can be used to monitor the pH of your soil by right-clicking on it. the strip will change color (red for acid, yellow/green for neutral, purple for alkali) so your plants won't rot.
+
+although, this is not always needed. you can always look at the plant visually and tell what's wrong.
 
 ### Fertilizer
 
