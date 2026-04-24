@@ -20,7 +20,7 @@ a wooden frame used for long-term stabilization of organic matter.
 - **logic:** requires a light level > 10 and air blocks above it.
 - **timer:** roughly 1 in-game day. if left in rain, the timer resets and the plant may turn into **Compost**.
 
-### Cauldron
+### Crucible
 
 the heart of the lab. unlike a vanilla cauldron, this requires a heat source (fire, magma, or a lit furnace) underneath it.
 
@@ -82,6 +82,8 @@ to manage the 16 drawers, players use **Notes**.
 ### Aging Barrel
 
 a large sealed barrel for biological conversion.
+
+![recipe](assets/aging-barrel-recipe.png)
 
 - **beer/wine:** place fruit juice or wort inside and right-click with a **Lid**.
 - **vinegar:** leave **Wine** inside without a **Lid** for 7 in-game days.
