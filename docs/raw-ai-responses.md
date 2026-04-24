@@ -573,7 +573,44 @@ You can have a single `Material_Fiber` component. Whether it comes from Flax, Ne
 
 It makes the **Screw Press** the most important non-chemical machine in the lab!
 
-## -----------------
+## quick summary -----------------
+
+Based on our discussion, here is the refined, "PlainTech" list of states. Using the **Generic ID + Data** approach, you only need to register these **11 base items**:
+
+### 🌿 The Botanical State Machine
+
+| State Item ID    | Data Component (NBT) | Process / Machine         | Use Case                              |
+| :--------------- | :------------------- | :------------------------ | :------------------------------------ |
+| `herb_fresh`     | `plant_id`           | **Harvesting**            | Short-lived raw material.             |
+| `herb_dried`     | `plant_id`           | **Drying Rack**           | Stable storage; ingredient base.      |
+| `herb_powder`    | `plant_id`           | **Mortar & Pestle**       | High-surface area; used in all logic. |
+| `herb_mash`      | `plant_id`           | **Mortar** (+ Water)      | Immediate, unstable topical fix.      |
+| `herb_tea`       | `plant_id`           | **Cauldron** (+ Water)    | Weak, short-term internal buff.       |
+| `herb_decoction` | `plant_id`           | **Cauldron** (Boiled)     | Concentrated, shelf-stable liquid.    |
+| `herb_essence`   | `plant_id`           | **Alembic** (+ Spirit)    | "Eye-drop" potency; no spoilage.      |
+| `herb_salve`     | `plant_id`           | **Cauldron** (+ Lard)     | Multidose topical "Crock."            |
+| `herb_bandage`   | `plant_id`           | **Crafting** (+ Gauze)    | Mobile, slow-release healing.         |
+| `herb_plaster`   | `plant_id`           | **Crafting** (+ Resin)    | Long-term "Set and Forget" seal.      |
+| `herb_pill`      | `plant_id`           | **Screw Press** (+ Sugar) | Stackable (64) portable doses.        |
+
+---
+
+### 🛠️ Why this is "Clean" Code:
+
+Since you’re managing this via ECS/NBT, your logic for a **Valerian Bandage** looks like this:
+
+- **Item:** `herbalis:herb_bandage`
+- **NBT:** `{plant_id: "valerian", durability: 100, potency: 1.5}`
+
+### 🎨 The "One-Texture" Rule
+
+You only need **one `.png` per State ID**.
+
+1. Your renderer checks the `plant_id`.
+2. It looks up the `color_hex` in your `plants.json`.
+3. It applies that tint to the mask of the generic texture.
+
+This keeps your assets folder tiny and your performance high. Does this list cover everything you need for the "Apothecary" loop, or did we miss a step in the transformation?
 
 ## -----------------
 
