@@ -1,4 +1,4 @@
-# herb states
+# Herb States
 
 there will be many herbs, so we must make a universal registering system for it to simplify recipes and later jei integration. instead of 200+ unique items, we use generic items with an nbt/component for the plant id.
 
@@ -58,7 +58,7 @@ here are all of the states which will be used in the game:
   - _template:_ `{} pastille`
   - _logic:_ [screw press](machines.md#screw-press) + sugar + powder.
 
-## chamomile example
+## Chamomile Example
 
 | state     | name                 | crafting logic    | in-game purpose                                              |
 | --------- | -------------------- | ----------------- | ------------------------------------------------------------ |
@@ -73,7 +73,7 @@ here are all of the states which will be used in the game:
 | plaster   | chamomile plaster    | salve + resin     | long-term: grants "rested" buff after 10 mins.               |
 | pill      | chamomile drop       | powder + sugar    | passive: very slowly lowers the insomnia timer over 20 mins. |
 
-## technical implementation
+## Technical Implementation
 
 for rendering, we use a single texture per state. the `plant_id` component carries a hex color code (e.g., `#d4af37` for valerian). the renderer applies this tint to the "liquid" or "herb" mask of the item model.
 
