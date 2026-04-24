@@ -11,3 +11,5 @@ how i make block models and the title: [Blockbench](https://www.blockbench.net/)
 how i make image modifications: [paint.net](https://www.getpaint.net/)
 
 the modrinth mod/project description used to be: `Minecraft mod that adds real-life herbs, teas, and natural remedies, letting you collect, process, and craft your way from folk medicine to advanced treatments like antibiotics.`
+
+TODO: update the license file from GPL v2.1 to GPL v3 ot MIT
