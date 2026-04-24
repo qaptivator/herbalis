@@ -9,8 +9,8 @@ the apothecary lab relies on a series of functional blocks that transform raw ma
 the entry-point for most botanical processing. it is a stone-tier block that handles manual grinding.
 
 - **grinding:** right-click with a **Dried Herb** to produce **Herb Powder**.
-- **crushing:** right-click with a **Fresh Herb** and a **Water Bucket** (or vial) to produce **Herb Mash**.
-- **mineral prep:** used to turn **Eggshells** into **Calcium Carbonate** or **Charcoal** into **Activated Carbon**.
+- **crushing:** right-click with a **Fresh Herb** to produce **Herb Mash**.
+- **mineral prep:** used to turn **Eggshells** (obtained from crushing **Eggs** in the mortar or throwing them) into **Calcium Carbonate** or **Charcoal** into **Activated Carbon**.
 
 ### Drying Rack
 
@@ -20,9 +20,9 @@ a wooden frame used for long-term stabilization of organic matter.
 - **logic:** requires a light level > 10 and air blocks above it.
 - **timer:** roughly 1 in-game day. if left in rain, the timer resets and the plant may turn into **Compost**.
 
-### Crucible
+### Basin
 
-the heart of the lab. unlike a vanilla basin, this requires a heat source (fire, magma, or a lit furnace) underneath it.
+the heart of the lab. unlike a vanilla cauldron, this requires a heat source (fire, magma, or a lit furnace) underneath it.
 
 - **infusion:** water + **Herb Powder** = **Herb Tea**.
 - **decoction:** leaving **Herb Tea** to boil for an additional 5 minutes.
@@ -60,7 +60,8 @@ a fine silk or mesh screen for separation.
 
 a 4x4 grid of physical drawers. this is the primary storage for a mid-to-late game lab.
 
-- **interaction:** - **right-click drawer:** slides open. right-click again to deposit an item.
+- **interaction:**
+  - **right-click drawer:** slides open. right-click again to deposit an item.
   - **left-click drawer:** retrieves the item if open.
   - **shift + right-click:** closes all open drawers.
 - **capacity:** each drawer holds one stack (64) of a single item type.

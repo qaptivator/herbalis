@@ -8,7 +8,7 @@
 
 ### pH Indicator
 
-first, boil beetroot in a crucible. then, crush paper into paper strips using the mortar and pestle. finally, soak those paper strips in the beetroot juice to get minimalistic pH indicators. (in real life, you'd use red cabbage or otherwise)
+first, boil beetroot in a basin. then, crush paper into paper strips using the mortar and pestle. finally, soak those paper strips in the beetroot juice to get minimalistic pH indicators. (in real life, you'd use red cabbage or otherwise)
 
 this can be used to monitor the pH of your soil by right clicking on it, so your plants wont rot or turn yellow
 
