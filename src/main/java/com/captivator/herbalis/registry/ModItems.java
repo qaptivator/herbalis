@@ -27,6 +27,11 @@ public class ModItems {
     }
 
     // ---------------------------------------------------------------------------------
+    // CERAMIC CUP
+    public static final RegistryObject<Item> UNFIRED_CUP_ITEM = ITEMS.register("unfired_cup", () -> new Item(herbProps()));
+    public static final RegistryObject<Item> CERAMIC_CUP_ITEM = ITEMS.register("ceramic_cup", () -> new Item(herbProps()));
+
+    // ---------------------------------------------------------------------------------
     // PLANTAGO
     public static final RegistryObject<Item> PLANTAGO_BLOCK_ITEM = ITEMS.register("plantago", () -> new BlockItem(ModBlocks.PLANTAGO_BLOCK.get(), herbProps()));
     public static final RegistryObject<Item> PLANTAGO_LEAF_ITEM = ITEMS.register("plantago_leaf", () -> new Item(herbProps()));
@@ -53,21 +58,29 @@ public class ModItems {
     public static final RegistryObject<Item> DRIED_CHAMOMILE_ITEM = ITEMS.register("dried_chamomile", () -> new Item(herbProps()));
     public static final RegistryObject<Item> MASHED_CHAMOMILE_ITEM = ITEMS.register("mashed_chamomile", () -> new Item(herbProps()));
     public static final RegistryObject<Item> GROUND_CHAMOMILE_ITEM = ITEMS.register("ground_chamomile", () -> new Item(herbProps()));
+    public static final RegistryObject<Item> CHAMOMILE_TEA = ITEMS.register("chamomile_tea", () -> new com.captivator.herbalis.items.HerbTeaItem(herbProps().stacksTo(1).craftRemainder(ModItems.CERAMIC_CUP_ITEM.get()).food(new FoodProperties.Builder().alwaysEat().build()), 
+            java.util.Map.of(ModMobEffects.PAIN_EFFECT, 200, ModMobEffects.SORENESS_EFFECT, 200)));
 
     // ---------------------------------------------------------------------------------
     // NETTLE
     public static final RegistryObject<Item> NETTLE_BLOCK_ITEM = ITEMS.register("nettle", () -> new BlockItem(ModBlocks.NETTLE_BLOCK.get(), herbProps()));
-    public static final RegistryObject<Item> NETTLE_LEAF_ITEM = ITEMS.register("nettle_leaf", () -> new Item(herbProps()));
+    public static final RegistryObject<Item> NETTLE_LEAF_ITEM = ITEMS.register("nettle_leaf", () -> new Item(herbProps().food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).alwaysEat().effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 100, 0), 1.0f).build())));
     public static final RegistryObject<Item> TALL_NETTLE_BLOCK_ITEM = ITEMS.register("tall_nettle", () -> new DoubleHighBlockItem(ModBlocks.TALL_NETTLE_BLOCK.get(), herbProps()));
 
     // ---------------------------------------------------------------------------------
     // VALERIAN
     public static final RegistryObject<Item> VALERIAN_BLOCK_ITEM = ITEMS.register("valerian", () -> new BlockItem(ModBlocks.VALERIAN_BLOCK.get(), herbProps()));
+    public static final RegistryObject<Item> VALERIAN_TEA = ITEMS.register("valerian_tea", () -> new com.captivator.herbalis.items.HerbTeaItem(herbProps().stacksTo(1).craftRemainder(ModItems.CERAMIC_CUP_ITEM.get()).food(new FoodProperties.Builder().alwaysEat().build()), 
+            java.util.Map.of(ModMobEffects.ANXIETY_EFFECT, 600, ModMobEffects.PAIN_EFFECT, 100)));
 
     // ---------------------------------------------------------------------------------
-    // CERAMIC CUP
-    public static final RegistryObject<Item> UNFIRED_CUP_ITEM = ITEMS.register("unfired_cup", () -> new Item(herbProps()));
-    public static final RegistryObject<Item> CERAMIC_CUP_ITEM = ITEMS.register("ceramic_cup", () -> new Item(herbProps()));
+    // MINT
+    public static final RegistryObject<Item> MINT_BLOCK_ITEM = ITEMS.register("mint", () -> new BlockItem(ModBlocks.MINT_BLOCK.get(), herbProps()));
+    public static final RegistryObject<Item> MINT_LEAF_ITEM = ITEMS.register("mint_leaf", () -> new Item(herbProps()));
+    public static final RegistryObject<Item> DRIED_MINT_ITEM = ITEMS.register("dried_mint", () -> new Item(herbProps()));
+    public static final RegistryObject<Item> GROUND_MINT_ITEM = ITEMS.register("ground_mint", () -> new Item(herbProps()));
+    public static final RegistryObject<Item> MINT_TEA = ITEMS.register("mint_tea", () -> new com.captivator.herbalis.items.HerbTeaItem(herbProps().stacksTo(1).craftRemainder(ModItems.CERAMIC_CUP_ITEM.get()).food(new FoodProperties.Builder().alwaysEat().build()), 
+            java.util.Map.of(ModMobEffects.INDIGESTION_EFFECT, 400)));
 
     // ---------------------------------------------------------------------------------
     // TOOLS & MISC

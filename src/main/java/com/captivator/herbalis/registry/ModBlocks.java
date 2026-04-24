@@ -45,6 +45,7 @@ public class ModBlocks {
                     .sound(SoundType.GRASS)
                     .offsetType(BlockBehaviour.OffsetType.XZ)));
     public static final RegistryObject<Block> VALERIAN_BLOCK = BLOCKS.register("valerian", () -> new NettleBlock(herbProps()));
+    public static final RegistryObject<Block> MINT_BLOCK = BLOCKS.register("mint", () -> new BushBlock(herbProps()));
 
     // ---------------------------------------------------------------------------------
     // FUNCTIONAL BLOCKS

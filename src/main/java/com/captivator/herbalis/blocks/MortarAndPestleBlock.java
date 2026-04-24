@@ -109,7 +109,8 @@ public class MortarAndPestleBlock extends Block implements EntityBlock {
         return stack.is(ModItems.PLANTAGO_LEAF_ITEM.get()) ||
                stack.is(ModItems.DRIED_PLANTAGO_ITEM.get()) ||
                stack.is(ModItems.CHAMOMILE_FLOWERS_ITEM.get()) ||
-               stack.is(ModItems.DRIED_CHAMOMILE_ITEM.get());
+               stack.is(ModItems.DRIED_CHAMOMILE_ITEM.get()) ||
+               stack.is(ModItems.DRIED_MINT_ITEM.get());
     }
 
     private ItemStack getGrindResult(ItemStack stack) {
@@ -117,6 +118,7 @@ public class MortarAndPestleBlock extends Block implements EntityBlock {
         if (stack.is(ModItems.DRIED_PLANTAGO_ITEM.get())) return new ItemStack(ModItems.GROUND_PLANTAGO_ITEM.get(), stack.getCount());
         if (stack.is(ModItems.CHAMOMILE_FLOWERS_ITEM.get())) return new ItemStack(ModItems.MASHED_CHAMOMILE_ITEM.get(), stack.getCount());
         if (stack.is(ModItems.DRIED_CHAMOMILE_ITEM.get())) return new ItemStack(ModItems.GROUND_CHAMOMILE_ITEM.get(), stack.getCount());
+        if (stack.is(ModItems.DRIED_MINT_ITEM.get())) return new ItemStack(ModItems.GROUND_MINT_ITEM.get(), stack.getCount());
         return stack;
     }
 

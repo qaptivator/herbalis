@@ -14,9 +14,11 @@ public class BleedingEffect extends MobEffect {
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
         // Damage the entity by 1.0F (half a heart)
-        // You can use DamageSource.MAGIC or create a custom one
         entity.hurt(DamageSource.MAGIC, 1.0F);
     }
+
+    // This is NOT a standard MobEffect override for stopping regeneration, 
+    // we will handle it in ModEvents.LivingHealEvent
 
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {

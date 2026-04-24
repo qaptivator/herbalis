@@ -25,12 +25,20 @@ public class ModCreativeTabs {
             items.add(new ItemStack(ModItems.DRIED_CHAMOMILE_ITEM.get()));
             items.add(new ItemStack(ModItems.MASHED_CHAMOMILE_ITEM.get()));
             items.add(new ItemStack(ModItems.GROUND_CHAMOMILE_ITEM.get()));
+            items.add(new ItemStack(ModItems.CHAMOMILE_TEA.get()));
             
             items.add(new ItemStack(ModItems.NETTLE_BLOCK_ITEM.get()));
             items.add(new ItemStack(ModItems.TALL_NETTLE_BLOCK_ITEM.get()));
             items.add(new ItemStack(ModItems.NETTLE_LEAF_ITEM.get()));
             
             items.add(new ItemStack(ModItems.VALERIAN_BLOCK_ITEM.get()));
+            items.add(new ItemStack(ModItems.VALERIAN_TEA.get()));
+
+            items.add(new ItemStack(ModItems.MINT_BLOCK_ITEM.get()));
+            items.add(new ItemStack(ModItems.MINT_LEAF_ITEM.get()));
+            items.add(new ItemStack(ModItems.DRIED_MINT_ITEM.get()));
+            items.add(new ItemStack(ModItems.GROUND_MINT_ITEM.get()));
+            items.add(new ItemStack(ModItems.MINT_TEA.get()));
             
             items.add(new ItemStack(ModItems.UNFIRED_CUP_ITEM.get()));
             items.add(new ItemStack(ModItems.CERAMIC_CUP_ITEM.get()));
