@@ -27,12 +27,12 @@ here are all of the states which will be used in the game:
 - **tea** -- weak liquid extraction. fast to make but becomes "stale" after one day.
 
   - _template:_ `{} tea`
-  - _logic:_ [cauldron](machines.md#cauldron) + water + powder + heat.
+  - _logic:_ [basin](machines.md#basin) + water + powder + heat.
 
 - **decoction** -- a stronger, concentrated liquid. shelf-stable and stackable in small vials. higher [toxicity](player.md#toxicity) than tea.
 
   - _template:_ `{} decoction`
-  - _logic:_ cauldron + extended boiling.
+  - _logic:_ basin + extended boiling.
 
 - **essence** -- the pure chemical essence. near-instant effect and never spoils. delivers in drops.
 
@@ -42,7 +42,7 @@ here are all of the states which will be used in the game:
 - **salve** -- a thick ointment for external use. comes in a multi-dose crock.
 
   - _template:_ `{} salve`
-  - _logic:_ cauldron + lard + powder. see [chemicals.md](chemicals.md#lard) for lipid info.
+  - _logic:_ basin + lard + powder. see [chemicals.md](chemicals.md#lard) for lipid info.
 
 - **bandage** -- a strip of cloth impregnated with medicine. provides slow-release healing while moving.
 

@@ -22,7 +22,7 @@ a wooden frame used for long-term stabilization of organic matter.
 
 ### Crucible
 
-the heart of the lab. unlike a vanilla cauldron, this requires a heat source (fire, magma, or a lit furnace) underneath it.
+the heart of the lab. unlike a vanilla basin, this requires a heat source (fire, magma, or a lit furnace) underneath it.
 
 - **infusion:** water + **Herb Powder** = **Herb Tea**.
 - **decoction:** leaving **Herb Tea** to boil for an additional 5 minutes.
@@ -95,7 +95,7 @@ a large sealed barrel for biological conversion.
 | :-------------- | :-------------- | :------------ | :---------------- |
 | **Fresh Herb**  | Drying Rack     | Air/Time      | **Dried Herb**    |
 | **Dried Herb**  | Mortar & Pestle | Manual        | **Herb Powder**   |
-| **Herb Powder** | Cauldron        | Water + Heat  | **Herb Tea**      |
+| **Herb Powder** | Basin           | Water + Heat  | **Herb Tea**      |
 | **Herb Powder** | Alembic         | Spirit + Heat | **Herb Essence**  |
 | **Herb Powder** | Screw Press     | Sugar         | **Herb Pastille** |
 | **Animal Fat**  | Screw Press     | Manual        | **Lard**          |
